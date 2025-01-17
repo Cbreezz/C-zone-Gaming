@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { TiLocationArrow } from "react-icons/ti";
 
 export const BentoTilt = ({ children, className = "" }) => {
@@ -38,10 +38,12 @@ export const BentoTilt = ({ children, className = "" }) => {
   );
 };
 
-export const BentoCard = ({ src, title, description, isComingSoon }) => {
+export const BentoCard = ({ src, thumbnail, title, description, isComingSoon }) => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [hoverOpacity, setHoverOpacity] = useState(0);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const hoverButtonRef = useRef(null);
+  const videoRef = useRef(null);
 
   const handleMouseMove = (event) => {
     if (!hoverButtonRef.current) return;
@@ -56,15 +58,44 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
   const handleMouseEnter = () => setHoverOpacity(1);
   const handleMouseLeave = () => setHoverOpacity(0);
 
+  useEffect(() => {
+    const handleIntersection = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          videoRef.current.src = src;
+          videoRef.current.load();
+          observer.disconnect();
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.5,
+    });
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [src]);
+
   return (
     <div className="relative size-full">
+      {!isVideoLoaded && (
+        <img
+          src={thumbnail}
+          alt={title}
+          className="absolute left-0 top-0 size-full object-cover object-center"
+        />
+      )}
       <video
-        src={src}
+        ref={videoRef}
+        onLoadStart={() => setIsVideoLoaded(true)}
         loop
         muted
         autoPlay
         className="absolute left-0 top-0 size-full object-cover object-center"
-        loading="lazy"
       />
       <div className="relative z-10 flex size-full flex-col justify-between p-5 text-blue-50">
         <div>
@@ -114,6 +145,7 @@ const Features = () => (
       <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
         <BentoCard
           src="videos/feature-1.mp4"
+          thumbnail="thumbnails/feature-1.jpg"
           title={
             <>
               Fog<b>hill of</b> five Elements
@@ -128,6 +160,7 @@ const Features = () => (
         <BentoTilt className="bento-tilt_1 row-span-1 md:col-span-1 md:row-span-2">
           <BentoCard
             src="videos/feature-2.mp4"
+            thumbnail="thumbnails/feature-2.jpg"
             title={
               <>
                 Best<b>R</b>ivalry
@@ -141,6 +174,7 @@ const Features = () => (
         <BentoTilt className="bento-tilt_1 row-span-1 ms-32 md:col-span-1 md:ms-0">
           <BentoCard
             src="videos/feature-3.mp4"
+            thumbnail="thumbnails/feature-3.jpg"
             title={
               <>
                 n<b>e</b>xt-gen<b>A</b>nime
@@ -154,6 +188,7 @@ const Features = () => (
         <BentoTilt className="bento-tilt_1 me-14 md:col-span-1 md:me-0">
           <BentoCard
             src="videos/feature-4.mp4"
+            thumbnail="thumbnails/feature-4.jpg"
             title={
               <>
                 Ani<b>ma</b>tions
@@ -175,13 +210,13 @@ const Features = () => (
         </BentoTilt>
 
         <BentoTilt className="bento-tilt_2">
-          <video
+          <BentoCard
             src="videos/feature-5.mp4"
+            thumbnail="thumbnails/feature-5.jpg"
             loop
             muted
             autoPlay
             className="size-full object-cover object-center"
-            loading="lazy"
           />
         </BentoTilt>
       </div>
