@@ -103,7 +103,12 @@ const Hero = () => {
     });
   });
 
-  const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
+  const getVideoSrc = (index, isMobile) => {
+    const baseSrc = `videos/hero-${index}`;
+    return isMobile ? `${baseSrc}-mobile.mp4` : `${baseSrc}.mp4`;
+  };
+
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
@@ -131,7 +136,7 @@ const Hero = () => {
               >
                 <video
                   ref={nextVdRef}
-                  src={getVideoSrc((currentIndex % totalVideos) + 1)}
+                  src={getVideoSrc((currentIndex % totalVideos) + 1, isMobile)}
                   loop
                   muted
                   id="current-video"
@@ -145,7 +150,7 @@ const Hero = () => {
 
           <video
             ref={nextVdRef}
-            src={getVideoSrc(currentIndex)}
+            src={getVideoSrc(currentIndex, isMobile)}
             loop
             muted
             id="next-video"
@@ -155,9 +160,7 @@ const Hero = () => {
           />
           <video
             ref={mainVideoRef}
-            src={getVideoSrc(
-              currentIndex === totalVideos - 1 ? 1 : currentIndex
-            )}
+            src={getVideoSrc(currentIndex === totalVideos - 1 ? 1 : currentIndex, isMobile)}
             autoPlay
             loop
             muted
