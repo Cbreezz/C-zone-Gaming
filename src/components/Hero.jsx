@@ -25,10 +25,6 @@ const Hero = () => {
     }
   }, []);
 
-  const getVideoSrc = () => {
-    return "videos/hero-1-mobile.mp4"; // Change this to your video file path
-  };
-
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
       <div
@@ -37,7 +33,7 @@ const Hero = () => {
       >
         <video
           ref={mainVideoRef}
-          src={getVideoSrc()}
+          src="videos/hero-1-mobile.mp4"  // Ensure this path is correct and the file is accessible
           autoPlay
           loop
           muted
