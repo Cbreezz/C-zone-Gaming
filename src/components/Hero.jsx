@@ -18,6 +18,7 @@ const Hero = () => {
 
   const totalVideos = 4;
   const nextVdRef = useRef(null);
+  const mainVideoRef = useRef(null);
 
   const handleVideoLoad = () => {
     setLoadedVideos((prev) => prev + 1);
@@ -34,6 +35,28 @@ const Hero = () => {
 
     setCurrentIndex((prevIndex) => (prevIndex % totalVideos) + 1);
   };
+
+  useEffect(() => {
+    if (mainVideoRef.current) {
+      const handleIntersection = (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            mainVideoRef.current.play();
+          } else {
+            mainVideoRef.current.pause();
+          }
+        });
+      };
+
+      const observer = new IntersectionObserver(handleIntersection, {
+        threshold: 0.5,
+      });
+
+      observer.observe(mainVideoRef.current);
+
+      return () => observer.disconnect();
+    }
+  }, []);
 
   useGSAP(
     () => {
@@ -127,8 +150,10 @@ const Hero = () => {
             id="next-video"
             className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
             onLoadedData={handleVideoLoad}
+            loading="lazy"
           />
           <video
+            ref={mainVideoRef}
             src={getVideoSrc(
               currentIndex === totalVideos - 1 ? 1 : currentIndex
             )}
@@ -137,6 +162,7 @@ const Hero = () => {
             muted
             className="absolute left-0 top-0 size-full object-cover object-center"
             onLoadedData={handleVideoLoad}
+            loading="lazy"
           />
         </div>
 
@@ -172,4 +198,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
