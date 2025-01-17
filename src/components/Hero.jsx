@@ -33,7 +33,7 @@ const Hero = () => {
       >
         <video
           ref={mainVideoRef}
-          src="videos/hero-1-mobile.mp4"  // Ensure this path is correct and the file is accessible
+          src="videos/hero-1.mp4"  // Ensure this path is correct and the file is accessible
           autoPlay
           loop
           muted
