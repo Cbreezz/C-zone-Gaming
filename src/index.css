@@ -286,3 +286,32 @@ body {
     max-width: 100%;
   }
 }
+
+@media (max-width: 768px) {
+  .bento-title {
+    font-size: 1.5rem;
+  }
+
+  .max-w-64 {
+    max-width: 100%;
+  }
+}
+
+.bento-title {
+  font-size: 2rem;
+  color: #ffffff;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+}
+
+.relative {
+  position: relative;
+}
+
+.size-full {
+  width: 100%;
+  height: 100%;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}

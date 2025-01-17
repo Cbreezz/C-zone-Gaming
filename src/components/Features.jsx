@@ -98,7 +98,7 @@ export const BentoCard = ({ src, thumbnail, title, description, isComingSoon }) 
         playsInline
         className="absolute left-0 top-0 size-full object-cover object-center"
       />
-      <div className="relative z-10 flex size-full flex-col justify-between p-5 text-blue-50">
+      <div className="relative z-10 flex size-full flex-col justify-between p-5 text-white text-shadow">
         <div>
           <h1 className="bento-title special-font">{title}</h1>
           {description && (
@@ -164,7 +164,7 @@ const Features = () => (
             thumbnail="thumbnails/feature-2.jpg"
             title={
               <>
-                Best<b>R</b>ivalry
+                Best<b> R</b>ivalry
               </>
             }
             description="Witness the epic clash between Sasuke and Naruto, a rivalry that defined a generation."
@@ -178,7 +178,7 @@ const Features = () => (
             thumbnail="thumbnails/feature-3.jpg"
             title={
               <>
-                n<b>e</b>xt-gen<b>A</b>nime
+                n<b>e</b>xt-gen<b> A</b>nime
               </>
             }
             description="Explore the future of anime with groundbreaking visuals and storytelling."
