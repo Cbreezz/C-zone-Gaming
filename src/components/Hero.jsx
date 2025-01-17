@@ -1,4 +1,3 @@
-import gsap from "gsap";
 import { useEffect, useRef } from "react";
 
 const Hero = () => {
@@ -26,39 +25,19 @@ const Hero = () => {
     }
   }, []);
 
-  useEffect(() => {
-    gsap.set("#video-frame", {
-      clipPath: "polygon(14% 0, 72% 0, 88% 90%, 0 95%)",
-      borderRadius: "0% 0% 40% 10%",
-    });
-    gsap.from("#video-frame", {
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-      borderRadius: "0% 0% 0% 0%",
-      ease: "power1.inOut",
-      scrollTrigger: {
-        trigger: "#video-frame",
-        start: "center center",
-        end: "bottom center",
-        scrub: true,
-      },
-    });
-  }, []);
-
-  const getVideoSrc = (isMobile) => {
-    return isMobile ? "videos/hero-1-mobile.mp4" : "videos/hero-1.mp4";
+  const getVideoSrc = () => {
+    return "videos/hero-1-mobile.mp4"; // Change this to your video file path
   };
-
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
       <div
         id="video-frame"
-        className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
+        className="relative z-10 h-dvh w-screen overflow-hidden bg-blue-75"
       >
         <video
           ref={mainVideoRef}
-          src={getVideoSrc(isMobile)}
+          src={getVideoSrc()}
           autoPlay
           loop
           muted
