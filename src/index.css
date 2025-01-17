@@ -271,3 +271,18 @@ body {
     opacity: 0.8;
   }
 }
+
+@media (max-width: 768px) {
+  .size-64 {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-heading {
+    font-size: 1.5rem;
+  }
+
+  .max-w-64 {
+    max-width: 100%;
+  }
+}
