@@ -64,30 +64,28 @@ const Hero = () => {
       )}
       
       {/* Video Container with scaling wrapper */}
-      <div className="absolute left-0 top-0 w-full h-full overflow-hidden">
-        <div className="relative w-full h-full">
-          {/* Main Video with responsive scaling */}
-          <video
-            ref={mainVideoRef}
-            src={getVideoSrc(currentIndex)}
-            autoPlay
-            loop
-            muted
-            playsInline
-            onLoadedData={() => setIsVideoLoaded(true)}
-            className="absolute top-1/2 left-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover"
-          />
-          
-          {/* Next Video with same responsive scaling */}
-          <video
-            ref={nextVideoRef}
-            src={getVideoSrc((currentIndex % totalVideos) + 1)}
-            muted
-            playsInline
-            loop
-            className="absolute top-1/2 left-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover opacity-0"
-          />
-        </div>
+      <div className="video-container">
+        <video
+          ref={mainVideoRef}
+          src={getVideoSrc(currentIndex)}
+          autoPlay
+          loop
+          muted
+          playsInline
+          onLoadedData={() => setIsVideoLoaded(true)}
+          className="video-element"
+        />
+      </div>
+
+      <div className="video-container">
+        <video
+          ref={nextVideoRef}
+          src={getVideoSrc((currentIndex % totalVideos) + 1)}
+          muted
+          playsInline
+          loop
+          className="video-element"
+        />
       </div>
       
       {/* Video Switch Button */}
