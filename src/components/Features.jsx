@@ -81,12 +81,12 @@ export const BentoCard = ({ src, thumbnail, title, description, isComingSoon }) 
   }, [src]);
 
   return (
-    <div className="relative size-full">
+    <div className="relative h-full w-full overflow-hidden">
       {!isVideoLoaded && (
         <img
           src={thumbnail}
           alt={title}
-          className="absolute left-0 top-0 size-full object-cover object-center"
+          className="absolute top-0 left-0 h-full w-full object-cover"
         />
       )}
       <video
@@ -96,9 +96,9 @@ export const BentoCard = ({ src, thumbnail, title, description, isComingSoon }) 
         muted
         autoPlay
         playsInline
-        className="absolute left-0 top-0 size-full object-cover object-center"
+        className="absolute top-0 left-0 h-full w-full object-cover"
       />
-      <div className="relative z-10 flex size-full flex-col justify-between p-5 text-white text-shadow">
+      <div className="relative z-10 flex h-full w-full flex-col justify-between p-5 text-white text-shadow">
         <div>
           <h1 className="bento-title special-font">{title}</h1>
           {description && (
@@ -114,7 +114,6 @@ export const BentoCard = ({ src, thumbnail, title, description, isComingSoon }) 
             onMouseLeave={handleMouseLeave}
             className="border-hsla relative flex w-fit cursor-pointer items-center gap-1 overflow-hidden rounded-full bg-black px-5 py-2 text-xs uppercase text-white/20"
           >
-            {/* Radial gradient hover effect */}
             <div
               className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
               style={{

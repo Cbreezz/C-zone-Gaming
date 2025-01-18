@@ -64,8 +64,8 @@ const Hero = () => {
       )}
       
       {/* Video Container with scaling wrapper */}
-      <div className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 md:h-full md:w-full">
-        <div className="relative h-full w-full">
+      <div className="absolute left-0 top-0 w-full h-full overflow-hidden">
+        <div className="relative w-full h-full">
           {/* Main Video with responsive scaling */}
           <video
             ref={mainVideoRef}
@@ -75,7 +75,7 @@ const Hero = () => {
             muted
             playsInline
             onLoadedData={() => setIsVideoLoaded(true)}
-            className="absolute left-1/2 top-1/2 min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 scale-[1.5] object-cover md:scale-100"
+            className="absolute top-1/2 left-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover"
           />
           
           {/* Next Video with same responsive scaling */}
@@ -85,7 +85,7 @@ const Hero = () => {
             muted
             playsInline
             loop
-            className="absolute left-1/2 top-1/2 min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 scale-[1.5] object-cover opacity-0 md:scale-100"
+            className="absolute top-1/2 left-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover opacity-0"
           />
         </div>
       </div>
